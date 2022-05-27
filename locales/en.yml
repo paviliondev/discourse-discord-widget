@@ -3,3 +3,5 @@ en:
     description: "Display a Discord widget on your Discourse forum"
   discord_widget:
     title: "Discord Chat"
+    no_server_id: "No server ID specified. Please add your Discord server ID in the theme copmonent settings"
+    no_invite_url: "No invite URL specified. Please add your Discord invite link in the theme copmonent settings"
