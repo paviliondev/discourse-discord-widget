@@ -1,0 +1,5 @@
+en:
+  theme_metadata:
+    description: "Display a Discord widget on your Discourse forum"
+  discord_widget:
+    title: "Discord Chat"

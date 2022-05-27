@@ -1,0 +1,15 @@
+discord_server_id:
+  type: string
+  default: ""
+  description:
+    en: "The ID of your Discord server. To find your server ID, on your Discord app navigate to: Server Settings > Widget > Server ID"
+require_login:
+  type: bool
+  default: false
+  description:
+    en: "Require users to be logged in to view the widget"
+minimum_trust_level:
+  type: integer
+  default: 0
+  description:
+    en: "The minimum trust level a user must have to view the widget"
