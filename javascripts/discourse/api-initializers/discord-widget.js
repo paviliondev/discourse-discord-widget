@@ -18,14 +18,16 @@ export default apiInitializer("0.11.1", (api) => {
   }
 
   // If user must be a group member
-  const requiredGroups = settings.required_groups
-    .split("|")
-    .map((g) => Number(g));
+  if (settings.required_groups.length > 0) {
+    const requiredGroups = settings.required_groups
+      .split("|")
+      .map((g) => Number(g));
 
-  const currentUserGroups = api.getCurrentUser().groups.map((g) => g.id);
+    const currentUserGroups = api.getCurrentUser().groups.map((g) => g.id);
 
-  if (!currentUserGroups.some((g) => requiredGroups.includes(g))) {
-    return;
+    if (!currentUserGroups.some((g) => requiredGroups.includes(g))) {
+      return;
+    }
   }
 
   api.decorateWidget("header-icons:before", (helper) => {
