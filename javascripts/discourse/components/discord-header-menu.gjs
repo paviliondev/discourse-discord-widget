@@ -79,6 +79,7 @@ export default class DiscordHeaderMenu extends Component {
                   frameborder="0"
                   id="chatwidget"
                   name="chatwidget"
+                  title={{i18n (themePrefix "discord_widget.title")}}
                 ></iframe>
               {{/if}}
             </MenuPanel>
