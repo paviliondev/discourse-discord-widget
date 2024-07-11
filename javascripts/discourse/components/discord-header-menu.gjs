@@ -28,11 +28,9 @@ export default class DiscordHeaderMenu extends Component {
     let theme = settings.theme;
 
     if (theme === "auto") {
-      if (window?.matchMedia("(prefers-color-scheme: dark)").matches) {
-        theme = "dark";
-      } else {
-        theme = "light";
-      }
+      theme = getComputedStyle(document.body)
+        .getPropertyValue("--scheme-type")
+        .trim();
     }
 
     return theme;
