@@ -1,53 +1,34 @@
 import { apiInitializer } from "discourse/lib/api";
-import User from "discourse/models/user";
+import DiscordHeaderMenu from "../components/discord-header-menu";
 
-export default apiInitializer("0.11.1", (api) => {
-  // If login is required
-  if (settings.require_login && !api.getCurrentUser()) {
+export default apiInitializer("1.28.0", (api) => {
+  const currentUser = api.getCurrentUser();
+
+  if (!currentUser && settings.require_login) {
     return;
   }
 
-  // If a trust level is required
-  if (User.currentProp("trust_level") < settings.minimum_trust_level) {
-    return;
-  }
-
-  // If user must be staff
-  if (settings.require_staff && !api.getCurrentUser().staff) {
-    return;
-  }
-
-  // If user must be a group member
-  if (settings.required_groups.length > 0) {
-    const requiredGroups = settings.required_groups
-      .split("|")
-      .map((g) => Number(g));
-
-    const currentUserGroups = api.getCurrentUser().groups.map((g) => g.id);
-
-    if (!currentUserGroups.some((g) => requiredGroups.includes(g))) {
+  if (currentUser) {
+    if (currentUser.trust_level < settings.minimum_trust_level) {
       return;
     }
+
+    if (!currentUser.staff && settings.require_staff) {
+      return;
+    }
+
+    if (settings.required_groups.length > 0) {
+      const requiredGroups = settings.required_groups
+        .split("|")
+        .map((g) => Number(g));
+
+      const currentUserGroups = currentUser.groups.map((g) => g.id);
+
+      if (!currentUserGroups.some((g) => requiredGroups.includes(g))) {
+        return;
+      }
+    }
   }
 
-  api.decorateWidget("header-icons:before", (helper) => {
-    const headerState = helper.widget.parentWidget.state;
-    return helper.attach("header-dropdown", {
-      title: themePrefix("discord_widget.title"),
-      icon: "fab-discord",
-      active: headerState.discordChatVisible,
-      action: "toggleDiscordChat",
-    });
-  });
-
-  api.decorateWidget("header-icons:after", (helper) => {
-    const headerState = helper.widget.parentWidget.state;
-    if (headerState.discordChatVisible) {
-      return [helper.attach("discord-chat-menu")];
-    }
-  });
-
-  api.attachWidgetAction("header", "toggleDiscordChat", function () {
-    this.state.discordChatVisible = !this.state.discordChatVisible;
-  });
+  api.headerIcons.add("discord", DiscordHeaderMenu, { before: "search" });
 });
