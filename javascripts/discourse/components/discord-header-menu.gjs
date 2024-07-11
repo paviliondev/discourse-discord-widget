@@ -47,13 +47,15 @@ export default class DiscordHeaderMenu extends Component {
         <DButton
           @action={{this.redirectToUrl}}
           @icon="fab-discord"
-          class="icon btn-flat"
+          class="icon btn-flat discord-widget"
         />
       {{else}}
         <DMenu
+          @identifier="discord-widget"
           @icon="fab-discord"
           @title={{i18n (themePrefix "discord_widget.title")}}
-          class="icon btn-flat"
+          @inline="true"
+          class="icon btn-flat discord-widget"
         >
           <:content>
             <MenuPanel @panelClass="discord-panel">
