@@ -1,8 +1,10 @@
+import { tracked } from "@glimmer/tracking";
 import Component from "@ember/component";
 import { action } from "@ember/object";
 import { bool } from "@ember/object/computed";
 import { inject as service } from "@ember/service";
 import { and, not } from "truth-helpers";
+import ConditionalLoadingSpinner from "discourse/components/conditional-loading-spinner";
 import DButton from "discourse/components/d-button";
 import DMenu from "discourse/components/d-menu";
 import MenuPanel from "discourse/components/menu-panel";
@@ -12,6 +14,8 @@ import PanelMessage from "./panel-message";
 
 export default class DiscordHeaderMenu extends Component {
   @service site;
+
+  @tracked loading = true;
 
   @bool("serverId") hasServerId;
   @bool("serverInviteUrl") hasInviteUrl;
@@ -39,6 +43,11 @@ export default class DiscordHeaderMenu extends Component {
   @action
   redirectToUrl() {
     DiscourseURL.routeTo(this.serverInviteUrl);
+  }
+
+  @action
+  iframeLoaded() {
+    this.loading = false;
   }
 
   <template>
@@ -82,8 +91,11 @@ export default class DiscordHeaderMenu extends Component {
                   frameborder="0"
                   id="chatwidget"
                   name="chatwidget"
+                  onload={{this.iframeLoaded}}
+                  class={{if this.loading "hidden" ""}}
                   title={{i18n (themePrefix "discord_widget.title")}}
                 ></iframe>
+                <ConditionalLoadingSpinner @condition={{this.loading}} />
               {{/if}}
             </MenuPanel>
           </:content>
