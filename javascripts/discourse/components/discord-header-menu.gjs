@@ -47,6 +47,7 @@ export default class DiscordHeaderMenu extends Component {
         <DButton
           @action={{this.redirectToUrl}}
           @icon="fab-discord"
+          @title={{i18n (themePrefix "discord_widget.title")}}
           class="icon btn-flat discord-widget"
         />
       {{else}}
