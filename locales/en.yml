@@ -1,6 +1,23 @@
 en:
   theme_metadata:
     description: "Display a Discord widget on your Discourse forum"
+
+    settings:
+      discord_server_id:
+        description: "The ID of your Discord server. To find your server ID, on your Discord app navigate to: Server Settings > Widget > Server ID"
+      discord_invite_url:
+        description: "The URL of your Discord invite link. To find your invite link, on your Discord app navigate to: Channel Settings > Invites > Create One. Make sure to also Edit Invite link and remove the expiration date."
+      require_login:
+        description: "Require users to be logged in to view the widget"
+      minimum_trust_level:
+        description: "The minimum trust level a user must have to view the widget. Note: the setting above (require_login) must be checked in order for this to work."
+      require_staff:
+        description: "Require users to be staff (admins + moderators) to view the widget. Note: the setting above (require_login) must be checked in order for this to work."
+      required_groups:
+        description: "Require users to be members of a set of predefined groups to see the widget. Note: the setting above (require_login) must be checked in order for this to work."
+      theme:
+        description: "The theme of the widget. Use auto to base the theme off your system theme"
+
   discord_widget:
     title: "Discord Chat"
     no_server_id: "No server ID specified. Please add your Discord server ID in the theme copmonent settings"

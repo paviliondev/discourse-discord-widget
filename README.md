@@ -64,4 +64,4 @@ Use the dropdown to select one or more groups. Users in **any** of the groups li
 
 #### `theme`
 
-Toggle the theme of the Discord widget. Select either light/dark to force set a theme or select 'auto' to have the theme automatically be chosen based on the user's system.
+Toggle the theme of the Discord widget. Select either light/dark to force set a theme or select 'auto' to have the theme automatically be chosen based on Discourse scheme.
