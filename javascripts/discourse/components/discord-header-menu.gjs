@@ -6,7 +6,7 @@ import { inject as service } from "@ember/service";
 import { and, not } from "truth-helpers";
 import ConditionalLoadingSpinner from "discourse/components/conditional-loading-spinner";
 import DButton from "discourse/components/d-button";
-import DMenu from "discourse/components/d-menu";
+import DMenu from "discourse/float-kit/components/d-menu";
 import MenuPanel from "discourse/components/menu-panel";
 import DiscourseURL from "discourse/lib/url";
 import i18n from "discourse-common/helpers/i18n";
