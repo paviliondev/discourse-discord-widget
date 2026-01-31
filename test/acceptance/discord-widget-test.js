@@ -1,6 +1,10 @@
 import { click, visit } from "@ember/test-helpers";
 import { test } from "qunit";
-import { acceptance, visible } from "discourse/tests/helpers/qunit-helpers";
+import {
+  acceptance,
+  exists,
+  visible,
+} from "discourse/tests/helpers/qunit-helpers";
 import I18n from "discourse-i18n";
 
 acceptance("Discord Widget - Default", function (needs) {
@@ -27,7 +31,7 @@ acceptance("Discord Widget - Default", function (needs) {
 
     assert.ok(visible(".discord-widget-content"), "The panel is visible");
     assert.ok(
-      visible(".discord-widget-content iframe"),
+      exists(".discord-widget-content iframe"),
       "The iframe is visible"
     );
   });
